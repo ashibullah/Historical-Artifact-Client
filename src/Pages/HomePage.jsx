@@ -1,9 +1,10 @@
-import Navbar from "../Components/Navbar";
+
 
 const HomePage = () => {
     return (
-        <div>
-            <Navbar/>
+        <div  className="min-h-screen flex flex-col">
+            
+
         </div>
     );
 };
