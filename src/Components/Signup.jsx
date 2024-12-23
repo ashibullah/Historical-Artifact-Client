@@ -1,11 +1,87 @@
+import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
+import { AuthContext } from "../Context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+    const {emailSignUp ,setUser ,updateUserProfile ,googleSignIn} = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleSignInGoogle = () =>{
+        googleSignIn()
+        .then((result)=> {
+              const user = result.user;
+              setUser(user);
+              console.log(user);
+          navigate("/")
+
+              
+             
+          }).catch((error) => {
+              // Handle Errors here.
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              // The email of the user's account used.
+              const email = error.customData.email;
+              // The AuthCredential type that was used.
+              // eslint-disable-next-line no-undef
+              const credential = GoogleAuthProvider.credentialFromError(error);
+              // ...
+              console.log(error,errorCode,errorMessage,email,credential)
+        })
+        
+      }
+    
+
+    const handleSignUpWithEmail = e =>{
+        e.preventDefault();
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const imageUrl = e.target.imageUrl.value;
+        // console.log(name,email,password,imageUrl);
+        emailSignUp(email,password)
+        .then(result =>{
+          const user = result.user;
+          setUser(user);
+          console.log(result);
+          updateUserProfile({ displayName: name, photoURL: imageUrl })
+                        .then(() => {
+                        //    console.log(user); 
+    
+                        navigate("/"); 
+                        // fetch('http://localhost:5000/users',{
+                        //   method: 'POST',
+                        //   headers: {
+                        //       'content-type': 'application/json',
+                        //   },
+                        //   body: JSON.stringify(user),
+              
+                        // })
+                        //   .then(res => res.json())
+                        //   .catch(err => {
+                        //       console.log(err);
+                        //   })
+    
+                          
+                        })
+                        .catch((err) => {
+                            toast("Error updating profile:", err);
+                        });
+    
+
+        })
+        .then("")
+    
+      }
+    
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-50">
           <div className="w-full max-w-sm px-6 py-8 bg-white shadow-lg rounded-lg">
             <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Sign Up</h2>
-            <form className="space-y-4" onSubmit={""}>
+            <form className="space-y-4" onSubmit={handleSignUpWithEmail}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                   Name
@@ -65,7 +141,7 @@ const Signup = () => {
                 <span className="bg-white px-2 text-gray-500">Or</span>
               </div>
             </div>
-            <button onClick={""}
+            <button onClick={handleSignInGoogle}
               className="mt-6 w-full flex items-center justify-center py-2 px-4 text-gray-700 border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 focus:ring-2 focus:ring-offset-2 focus:ring-gray-300"
             >
               <FcGoogle className="w-5 h-5 mr-2" /> 
