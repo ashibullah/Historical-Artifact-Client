@@ -34,47 +34,69 @@ const Signup = () => {
       }
     
 
-    const handleSignUpWithEmail = e =>{
+      const handleSignUpWithEmail = (e) => {
         e.preventDefault();
+      
         const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         const imageUrl = e.target.imageUrl.value;
-        // console.log(name,email,password,imageUrl);
-        emailSignUp(email,password)
-        .then(result =>{
-          const user = result.user;
-          setUser(user);
-          console.log(result);
-          updateUserProfile({ displayName: name, photoURL: imageUrl })
-                        .then(() => {
-                        //    console.log(user); 
-    
-                        navigate("/"); 
-                        // fetch('http://localhost:5000/users',{
-                        //   method: 'POST',
-                        //   headers: {
-                        //       'content-type': 'application/json',
-                        //   },
-                        //   body: JSON.stringify(user),
-              
-                        // })
-                        //   .then(res => res.json())
-                        //   .catch(err => {
-                        //       console.log(err);
-                        //   })
-    
-                          
-                        })
-                        .catch((err) => {
-                            toast("Error updating profile:", err);
-                        });
-    
-
-        })
-        .then("")
-    
-      }
+      
+        
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasLowercase = /[a-z]/.test(password);
+        const isLongEnough = password.length >= 6;
+      
+        if (!hasUppercase) {
+          toast.error("Password must include at least one uppercase letter.");
+          return;
+        }
+      
+        if (!hasLowercase) {
+          toast.error("Password must include at least one lowercase letter.");
+          return;
+        }
+      
+        if (!isLongEnough) {
+          toast.error("Password must be at least 6 characters long.");
+          return;
+        }
+      
+        // Proceed with signup
+        emailSignUp(email, password)
+          .then((result) => {
+            const user = result.user;
+            setUser(user);
+            console.log(result);
+      
+            // Update user profile
+            updateUserProfile({ displayName: name, photoURL: imageUrl })
+              .then(() => {
+                toast.success("Profile updated successfully!");
+                navigate("/");
+      
+               
+                // fetch("http://localhost:5000/users", {
+                //   method: "POST",
+                //   headers: {
+                //     "Content-Type": "application/json",
+                //   },
+                //   body: JSON.stringify(user),
+                // })
+                //   .then((res) => res.json())
+                //   .catch((err) => console.error("Error ", err));
+              })
+              .catch((err) => {
+                console.error("Error updating profile:", err);
+                toast.error("Error updating profile.");
+              });
+          })
+          .catch((err) => {
+            console.error("Error signing up:", err);
+            toast.error("Error signing up. Please try again.");
+          });
+      };
+      
     
 
     return (
