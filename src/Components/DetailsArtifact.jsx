@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
+import { toast } from "react-toastify";
 
 const DetailsArtifact = () => {
     const {user} = useContext(AuthContext);
@@ -15,12 +16,19 @@ const DetailsArtifact = () => {
         if(!liked){
             // this will like  
             axios.patch(`http://localhost:5000/like/${id}`, {email : user.email})
-            .then(res => console.log(res.data))    
+            .then(res => {
+                console.log(res.data)
+                toast.success("You've liked it");
+
+            })    
         }
         else{
             //this will unlike 
             axios.patch(`http://localhost:5000/unlike/${id}`, {email : user.email})
-            .then(res => console.log(res.data))
+            .then(res => {
+                console.log(res.data)
+                toast("You've unlike it")
+            })
         }
         setLiked(!liked);
       };

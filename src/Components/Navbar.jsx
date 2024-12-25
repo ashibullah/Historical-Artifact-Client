@@ -77,13 +77,13 @@ const Navbar = () => {
             <ul tabIndex={0} className="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <button onClick={handleLogout}>My Artifacts</button>
+                <Link to={`/artifacts/user/${user.email}`}>My Artifacts</Link>
               </li>
               <li>
-                <button onClick={handleLogout}>Liked Artifacts</button>
+                <Link to={`/artifacts/myLikes/${user.email}`}>Liked Artifacts</Link>
               </li>
               <li>
-                <button onClick={handleLogout}>Logout</button>
+                <button onClick={handleLogout} >Logout</button>
               </li>
             </ul>
           </div>

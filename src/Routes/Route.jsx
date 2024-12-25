@@ -8,6 +8,8 @@ import PrivateRoute, { CrashLogin } from "./PrivateRoute";
 import Artifacts from "../Components/Artifacts";
 import DetailsArtifact from "../Components/DetailsArtifact";
 import MyArtifacts from "../Components/MyArtifacts";
+import LikedArtifacts from "../Components/LikedArtifacts";
+import UpdateArtifact from "../Components/UpdateArtifact";
 
 export const router = createBrowserRouter([
     {
@@ -53,9 +55,25 @@ export const router = createBrowserRouter([
             }
             ,
             {
-                path: "/artifacts/user/:id",
+                path: "/artifacts/update/:id",
+                element: <PrivateRoute>
+                    <UpdateArtifact />
+                </PrivateRoute>
+                 
+            }
+            ,
+            {
+                path: "/artifacts/user/:email",
                 element: <PrivateRoute>
                     <MyArtifacts />
+                </PrivateRoute>
+                 
+            }
+            ,
+            {
+                path: "/artifacts/myLikes/:email",
+                element: <PrivateRoute>
+                    <LikedArtifacts />
                 </PrivateRoute>
                  
             }
