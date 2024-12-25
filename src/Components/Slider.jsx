@@ -1,7 +1,7 @@
 const Slider = () => {
     return (
-        <div className="carousel w-full overflow-hidden">
-            <div id="slide1" className="carousel-item relative w-full" style={{ height: "50vh" }}>
+        <div className="carousel w-full  overflow-hidden">
+            <div id="slide1" className="carousel-item relative w-full" style={{ height: "80vh" }}>
                 <div
                     className="bg-cover bg-center w-full text-white"
                     style={{
@@ -23,7 +23,7 @@ const Slider = () => {
                 </div>
             </div>
 
-            <div id="slide2" className="carousel-item relative w-full" style={{ height: "50vh" }}>
+            <div id="slide2" className="carousel-item relative w-full" style={{ height: "80vh" }}>
                 <div
                     className="bg-cover bg-center w-full text-white"
                     style={{
@@ -45,7 +45,7 @@ const Slider = () => {
                 </div>
             </div>
 
-            <div id="slide3" className="carousel-item relative w-full" style={{ height: "50vh" }}>
+            <div id="slide3" className="carousel-item relative w-full" style={{ height: "80vh" }}>
                 <div
                     className="bg-cover bg-center w-full text-white"
                     style={{
@@ -67,7 +67,7 @@ const Slider = () => {
                 </div>
             </div>
 
-            <div id="slide4" className="carousel-item relative w-full" style={{ height: "50vh" }}>
+            <div id="slide4" className="carousel-item relative w-full" style={{ height: "80vh" }}>
                 <div
                     className="bg-cover bg-center w-full text-white"
                     style={{

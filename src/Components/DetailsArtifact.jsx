@@ -1,24 +1,46 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../Context/AuthProvider";
 
 const DetailsArtifact = () => {
+    const {user} = useContext(AuthContext);
     const { id } = useParams(); 
     const [artifact, setArtifact] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [liked, setLiked] = useState(false);
+    const [liked, setLiked] = useState(null);
 
-    const toggleLike = () => {
+    const handleLike = () => {
+        if(!liked){
+            // this will like  
+            axios.patch(`http://localhost:5000/like/${id}`, {email : user.email})
+            .then(res => console.log(res.data))    
+        }
+        else{
+            //this will unlike 
+            axios.patch(`http://localhost:5000/unlike/${id}`, {email : user.email})
+            .then(res => console.log(res.data))
+        }
         setLiked(!liked);
       };
-
+    
+      
     useEffect(() => {
         axios
             .get(`http://localhost:5000/artifacts/${id}`)
             .then((res) => {
                 setArtifact(res.data);
+                // console.log(artifact);
                 setLoading(false);
+                // console.log(artifact.likedBy.includes(user.email))
+                if (res.data.likedBy && res.data.likedBy.includes(user.email)) {
+                    setLiked(true);
+                } else {
+                    setLiked(false);
+                }
+                
+                
             })
             .catch((err) => {
                 console.error("Error fetching artifact details:", err);
@@ -73,7 +95,7 @@ const DetailsArtifact = () => {
                 <span className="font-semibold">Added By:</span> {artifact.addedBy.name} ({artifact.addedBy.email})
             </p>
 
-            <button onClick={toggleLike} className="mt-4 text-3xl text-blue-500">
+            <button onClick={handleLike} className="mt-4 text-3xl text-blue-500">
             {(liked) ? <BiSolidLike/> :<BiLike /> }
             
             
