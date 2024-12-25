@@ -14,6 +14,8 @@ const AddArtifact = () => {
       name : user.displayName,
       email : user.email,
     }
+    initialData.likedBy = [];
+
     
     axios.post('http://localhost:5000/artifacts/add' , initialData)
     .then(res =>{

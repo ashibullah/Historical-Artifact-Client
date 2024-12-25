@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Artifacts = () => {
     const [loading, setLoading] = useState(true);
     const [artifacts, setArtifacts] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
@@ -28,23 +30,33 @@ const Artifacts = () => {
         );
     }
 
+    const handleArtifactDetails = (id) => {
+        navigate(`/artifacts/${id}`);
+    }
+
     return (
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 p-4 lg:px-20">
             {artifacts &&
-                artifacts.map((artifact, index) => (
-                    <div key={index} className="group block bg-white rounded-lg shadow hover:shadow-lg">
+                artifacts.map((artifact,) => (
+                    <div key={artifact._id} className="group block bg-white rounded-lg shadow hover:shadow-lg flex flex-col justify-around">
                         <img
                             src={artifact.artifactImage}
                             alt={artifact.artifactName}
                             className="w-full h-64 object-cover rounded-t-lg"
                         />
-                        <div className="p-4">
+                        <div className="p-4 flex flex-col justify-end">
                             <h3 className="text-gray-900 font-bold text-lg group-hover:underline group-hover:underline-offset-4">
                                 {artifact.artifactName}
                             </h3>
                             <p className="mt-2 text-sm text-gray-700">
                                 Present Location: <span className="font-medium">{artifact.presentLocation}</span>
                             </p>
+                            <button
+                                onClick={()=> handleArtifactDetails(artifact._id)}
+                                className="w-1/2 mt-3 bg-red-800 text-white py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition duration-300"
+                            >
+                                Details
+                            </button>
                         </div>
                     </div>
                 ))}

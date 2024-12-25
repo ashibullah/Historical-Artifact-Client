@@ -6,6 +6,7 @@ import Signup from "../Components/Signup";
 import AddArtifact from "../Components/AddArtifacts";
 import PrivateRoute, { CrashLogin } from "./PrivateRoute";
 import Artifacts from "../Components/Artifacts";
+import DetailsArtifact from "../Components/DetailsArtifact";
 
 export const router = createBrowserRouter([
     {
@@ -41,6 +42,15 @@ export const router = createBrowserRouter([
                 </PrivateRoute>
                  
             }
+            ,
+            {
+                path: "/artifacts/:id",
+                element: <PrivateRoute>
+                    <DetailsArtifact />
+                </PrivateRoute>
+                 
+            }
+            
         ]
 
     },
