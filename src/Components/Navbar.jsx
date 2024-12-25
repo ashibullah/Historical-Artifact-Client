@@ -40,11 +40,16 @@ const Navbar = () => {
                 <NavLink className="text-gray-500 transition hover:text-gray-500/75" to={"/"}> Home </NavLink>
               </li>
               <li>
-                <NavLink className="text-gray-500 transition hover:text-gray-500/75" to={"#"}> All Artifacts </NavLink>
+                <NavLink className="text-gray-500 transition hover:text-gray-500/75" to={"/artifacts"}> All Artifacts </NavLink>
               </li>
-              <li>
-                <NavLink className="text-gray-500 transition hover:text-gray-500/75" to={"#"}> Add Artifacts </NavLink>
-              </li>
+              {
+                user?(
+                  <li>
+                  <NavLink className="text-gray-500 transition hover:text-gray-500/75" to={"/artifacts/add"}> Add Artifacts </NavLink>
+                </li>
+                ) : ""
+              }
+             
             </ul>
           </nav>
 
