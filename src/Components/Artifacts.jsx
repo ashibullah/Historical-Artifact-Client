@@ -9,7 +9,7 @@ const Artifacts = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:5000/artifacts/")
+            .get("https://historical-artifacts-tracker-server-theta.vercel.app/artifacts/")
             .then((res) => {
                 setArtifacts(res.data);
                 setLoading(false);

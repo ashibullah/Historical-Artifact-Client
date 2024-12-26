@@ -23,12 +23,12 @@ const UpdateArtifact = () => {
         initialData.likedBy = [];
     
         
-        axios.put(`http://localhost:5000/update/artifact/${artifact._id}` , initialData)
+        axios.put(`https://historical-artifacts-tracker-server-theta.vercel.app/update/artifact/${artifact._id}` , initialData)
         .then((res) => {
             toast.success(res.data); 
             
             axios
-                .get(`http://localhost:5000/artifacts/${artifact._id}`)
+                .get(`https://historical-artifacts-tracker-server-theta.vercel.app/artifacts/${artifact._id}`)
                 .then((res) => {
                     setArtifact(res.data); 
                     e.target.reset(); 
@@ -45,7 +45,7 @@ const UpdateArtifact = () => {
       
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/artifacts/${id}`)
+            .get(`https://historical-artifacts-tracker-server-theta.vercel.app/artifacts/${id}`)
             .then((res) => {
                 setArtifact(res.data);
                 // console.log(artifact);

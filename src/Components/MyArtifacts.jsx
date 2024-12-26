@@ -13,7 +13,7 @@ const MyArtifacts = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/artifacts/user/${user.email}`)
+            .get(`https://historical-artifacts-tracker-server-theta.vercel.app/artifacts/user/${user.email}`)
             .then((res) => {
                 setArtifacts(res.data);
                 setLoading(false);
@@ -41,7 +41,7 @@ const MyArtifacts = () => {
         navigate(`/artifacts/update/${id}`);
     }
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:5000/artifacts/delete/${id}`).then(res => {
+        axios.delete(`https://historical-artifacts-tracker-server-theta.vercel.app/artifacts/delete/${id}`).then(res => {
             toast(res.data);
             setArtifacts((prevArtifacts) => 
                 prevArtifacts.filter((artifact) => artifact._id !== id)

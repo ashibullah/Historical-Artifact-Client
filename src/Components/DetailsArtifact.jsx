@@ -15,7 +15,7 @@ const DetailsArtifact = () => {
     const handleLike = () => {
         if(!liked){
             // this will like  
-            axios.patch(`http://localhost:5000/like/${id}`, {email : user.email})
+            axios.patch(`https://historical-artifacts-tracker-server-theta.vercel.app/like/${id}`, {email : user.email})
             .then(res => {
                 console.log(res.data)
                 toast.success("You've liked it");
@@ -25,7 +25,7 @@ const DetailsArtifact = () => {
         }
         else{
             //this will unlike 
-            axios.patch(`http://localhost:5000/unlike/${id}`, {email : user.email})
+            axios.patch(`https://historical-artifacts-tracker-server-theta.vercel.app/unlike/${id}`, {email : user.email})
             .then(res => {
                 console.log(res.data)
                 toast("You've unlike it")
@@ -39,7 +39,7 @@ const DetailsArtifact = () => {
       
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/artifacts/${id}`)
+            .get(`https://historical-artifacts-tracker-server-theta.vercel.app/artifacts/${id}`)
             .then((res) => {
                 setArtifact(res.data);
                 // console.log(artifact);

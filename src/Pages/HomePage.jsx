@@ -10,8 +10,9 @@ const HomePage = () => {
             <div className="flex-grow">
                 <Slider/>
                 <FeaturedArtifact/>
-                <HistoricalArtifactTimeline/>
                 <MapComponent/>
+                <HistoricalArtifactTimeline/>
+
             </div>
 
         </div>

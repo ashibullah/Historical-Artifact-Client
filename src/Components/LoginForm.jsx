@@ -40,8 +40,8 @@ const LoginForm = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         emailLogin(email, password)
-            .then(result => {
-                console.log(result);
+            .then(() => {
+                // console.log(result);
                 navigate("/");
             }).catch(err => {
                 alert(err);

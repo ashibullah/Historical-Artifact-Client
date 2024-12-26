@@ -10,10 +10,10 @@ const LikedArtifacts = () => {
 
     useEffect(() => {
         if (user?.email) {
-            axios.get(`http://localhost:5000/artifacts/likedBy/${user.email}`)
+            axios.get(`https://historical-artifacts-tracker-server-theta.vercel.app/artifacts/likedBy/${user.email}`)
                 .then(res => {
                     setArtifacts(res.data);
-                    console.log(res.data);
+                    // console.log(res.data);
                 })
                 .catch(err => {
                     console.error("Error fetching artifacts:", err);

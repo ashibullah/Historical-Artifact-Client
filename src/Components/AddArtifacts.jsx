@@ -17,7 +17,7 @@ const AddArtifact = () => {
     initialData.likedBy = [];
 
     
-    axios.post('http://localhost:5000/artifacts/add' , initialData)
+    axios.post('https://historical-artifacts-tracker-server-theta.vercel.app/artifacts/add' , initialData)
     .then(res =>{
       toast(res.data);
       e.target.reset();
