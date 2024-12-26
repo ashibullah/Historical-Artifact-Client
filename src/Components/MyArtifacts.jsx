@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
+import { toast } from "react-toastify";
 
 
 const MyArtifacts = () => {
@@ -39,6 +40,14 @@ const MyArtifacts = () => {
     const handleUpdateDetails = (id) => {
         navigate(`/artifacts/update/${id}`);
     }
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:5000/artifacts/delete/${id}`).then(res => {
+            toast(res.data);
+            setArtifacts((prevArtifacts) => 
+                prevArtifacts.filter((artifact) => artifact._id !== id)
+            );
+        })
+    }
 
     return (
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 p-4 lg:px-20">
@@ -66,9 +75,15 @@ const MyArtifacts = () => {
                             </button>
                             <button
                                 onClick={()=> handleUpdateDetails(artifact._id)}
-                                className="w-1/2 mt-3 bg-red-800 text-white py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition duration-300"
+                                className="w-1/2 mt-3 bg-green-800 text-white py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition duration-300"
                             >
                                 Update
+                            </button>  
+                            <button
+                                onClick={()=> handleDelete(artifact._id)}
+                                className="w-1/2 mt-3 bg-red-600 text-white py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition duration-300"
+                            >
+                                Delete
                             </button>  
                             </div>
                             

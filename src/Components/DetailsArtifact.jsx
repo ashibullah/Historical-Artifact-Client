@@ -11,7 +11,7 @@ const DetailsArtifact = () => {
     const [artifact, setArtifact] = useState(null);
     const [loading, setLoading] = useState(true);
     const [liked, setLiked] = useState(null);
-
+    const [likeCount, setLikeCount] = useState(null)
     const handleLike = () => {
         if(!liked){
             // this will like  
@@ -19,6 +19,7 @@ const DetailsArtifact = () => {
             .then(res => {
                 console.log(res.data)
                 toast.success("You've liked it");
+                setLikeCount(likeCount+1);
 
             })    
         }
@@ -28,6 +29,8 @@ const DetailsArtifact = () => {
             .then(res => {
                 console.log(res.data)
                 toast("You've unlike it")
+                setLikeCount(likeCount-1);
+
             })
         }
         setLiked(!liked);
@@ -44,6 +47,7 @@ const DetailsArtifact = () => {
                 // console.log(artifact.likedBy.includes(user.email))
                 if (res.data.likedBy && res.data.likedBy.includes(user.email)) {
                     setLiked(true);
+                    setLikeCount(res.data.likedBy.length);
                 } else {
                     setLiked(false);
                 }
@@ -102,12 +106,14 @@ const DetailsArtifact = () => {
             <p className="text-gray-700">
                 <span className="font-semibold">Added By:</span> {artifact.addedBy.name} ({artifact.addedBy.email})
             </p>
-
-            <button onClick={handleLike} className="mt-4 text-3xl text-blue-500">
+            <div className="flex items-center gap-3">
+              <button onClick={handleLike} className="mt-4 text-3xl text-blue-500 ">
             {(liked) ? <BiSolidLike/> :<BiLike /> }
-            
-            
             </button>
+            
+            <p className="font-medium">{likeCount}</p>  
+            </div>
+            
             </div>
            
         </div>
