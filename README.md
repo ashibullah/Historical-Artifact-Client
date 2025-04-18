@@ -9,8 +9,7 @@ Designed for history enthusiasts, students, and researchers, the platform offers
 The purpose of this project is to serve as an educational tool and a resource for anyone interested in learning more about historical artifacts. Whether you're a student, educator, or history lover, this app provides an accessible way to explore objects that have shaped our past.
 
 ## 🔗 Live URL
-Check out the live site here:  
-👉 [https://historical-artifacts-cli.web.app/](https://historical-artifacts-cli.web.app/)
+Check out the live site here:  👉 [https://historical-artifacts-cli.web.app/](https://historical-artifacts-cli.web.app/)
 
 ## 🧑‍💻 GitHub Repository
 Explore the Server:
